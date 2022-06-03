@@ -3,6 +3,9 @@
 #include <iostream>
 
 // Input to the program will be integers, submitted one per line. Input should be handled as follows:
+// - a nonzero value should be added into a subtotal;
+// - a zero value should cause the subtotal to be printed and reset to zero;
+// - two consecutive zeroes should cause the total of all values input to be printed and the program to be terminated.
 
 int main() {
   int input;
