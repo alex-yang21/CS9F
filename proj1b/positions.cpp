@@ -1,6 +1,7 @@
 // TODO: Your code here
 #include <iostream>
 #include <positions.h>
+#include <cmath>
 
 // constructor 1
 Position::Position()
@@ -34,8 +35,16 @@ void Position::IncrementPosition(float rChange, float angularDistChange) {
     cout << "At least one argument must be 0.";
     return;
   }
+
+  // we need to make sure the radius is never less than 1
   myRadius += rChange;
+  if (myRadius < 1) {
+    myRadius = 1;
+  }
+
+  // we need to make sure the angles wrap around
   myAngleInRadians += angularDistChange;
+  myAngleInRadians %= (2 * M_PI);
 }
 
 void Position::Print() const { // const means it can't modify anything
@@ -49,12 +58,21 @@ bool Position::Sees(Position pos) const {
     return false;
   }
 
+  // cat sees mouse if (cat radius) * cos (cat angle - mouse angle) >= 1.0 (angles in radian)
+  bool cat_sees;
+  cat_sees = myRadius * cos(myAngleInRadians - pos.myAngleInRadians) >= 1.0 ? true : false;
 
-
+  // if the statue position is between the cat and the mouse, then the cat can't see
+  Position statuePosition = Position(0, 0);
+  if (myAngleInRadians == 0 && !statuePosition.IsBetween(pos, *this)) {
+    return false;
+  } else {
+    return cat_sees;
+  }
 }
 
 bool Position::IsAtStatue() const {
-  if (myRadius <= 1) {
+  if (myRadius == 1) {
     return true;
   } else {
     return false;
@@ -62,5 +80,5 @@ bool Position::IsAtStatue() const {
 }
 
 bool Position::IsBetween(Position pos1, Position pos2) const {
-
+  /* TO-DO */
 }
