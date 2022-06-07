@@ -1,7 +1,8 @@
 // TODO: Your code here
 #include <iostream>
-#include <positions.h>
+#include "positions.h"
 #include <cmath>
+using namespace std;
 
 // constructor 1
 Position::Position()
@@ -32,7 +33,7 @@ void Position::SetAbsolutePosition(float r, float thetaInRadians) {
 
 void Position::IncrementPosition(float rChange, float angularDistChange) {
   if (rChange != 0 && angularDistChange != 0) {
-    cout << "At least one argument must be 0.";
+    std::cout << "At least one argument must be 0." << endl;
     return;
   }
 
@@ -48,13 +49,13 @@ void Position::IncrementPosition(float rChange, float angularDistChange) {
 }
 
 void Position::Print() const { // const means it can't modify anything
-  cout << "Radius: " << myRadius << "\n";
-  cout << "Angle: " << myAngleInRadians << "\n";
+  std::cout << "Radius: " << myRadius << ", Angle: " << myAngleInRadians << endl;
 }
 
+// we will call this on the mouse's position with the cat's position
 bool Position::Sees(Position pos) const {
 
-  if (!pos.IsAtStatue()) { // argument position must be at the statue
+  if (!pos.IsAtStatue()) { // argument position (mouse) must be at the statue
     return false;
   }
 
@@ -80,5 +81,15 @@ bool Position::IsAtStatue() const {
 }
 
 bool Position::IsBetween(Position pos1, Position pos2) const {
-  /* TO-DO */
+  float angle1 = pos1.myAngleInRadians;
+  float angle2 = pos2.myAngleInRadians;
+
+  float radius1 = pos1.myRadius;
+  float radius2 = pos2.myRadius;
+
+  if (angle1 - angle2 < M_PI && radius1 == radius2) {
+    return true;
+  } else {
+    return false;
+  }
 }
