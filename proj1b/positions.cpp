@@ -1,12 +1,11 @@
-// TODO: Your code here
-#include <iostream>
 #include "positions.h"
 #include <cmath>
+#include <iostream>
 using namespace std;
 
 // constructor 1
 Position::Position()
-: myRadius(1), myAngleInRadians(0))
+: myRadius(1), myAngleInRadians(0)
 {
   // default values if no parameters passed in
 }
@@ -20,9 +19,10 @@ Position::Position(float r)
 
 // constructor 3
 Position::Position(float r, float thetaInRadians)
-: myRadius(r), myAngleInRadians(thetaInRadians)
 {
   // assign both radius and angle
+  myRadius = r;
+  myAngleInRadians = fmodf(thetaInRadians, (float) (2 * M_PI));
 }
 
 // beginning of member functions
@@ -37,15 +37,18 @@ void Position::IncrementPosition(float rChange, float angularDistChange) {
     return;
   }
 
-  // we need to make sure the radius is never less than 1
+  // we need to make sure the radius is never less than 1, order of change does not matter since both will not be changed at once
   myRadius += rChange;
   if (myRadius < 1) {
     myRadius = 1;
   }
 
-  // we need to make sure the angles wrap around
-  myAngleInRadians += angularDistChange;
-  myAngleInRadians %= (2 * M_PI);
+  /* When the cat circles distance d around the statue, its radius does not change,
+     and the change in its angle can be calculated from the relationship d = angle * radius
+  */
+  float angle_change = angularDistChange / myRadius;
+  myAngleInRadians += angle_change;
+  myAngleInRadians = fmodf(myAngleInRadians, (float) (2 * M_PI));  // we need to make sure the angles wrap around
 }
 
 void Position::Print() const { // const means it can't modify anything
@@ -60,16 +63,16 @@ bool Position::Sees(Position pos) const {
   }
 
   // cat sees mouse if (cat radius) * cos (cat angle - mouse angle) >= 1.0 (angles in radian)
-  bool cat_sees;
-  cat_sees = myRadius * cos(myAngleInRadians - pos.myAngleInRadians) >= 1.0 ? true : false;
+  bool cat_sees = myRadius * cos(myAngleInRadians - pos.myAngleInRadians) >= 1.0 ? true : false;
+  return cat_sees;
 
-  // if the statue position is between the cat and the mouse, then the cat can't see
-  Position statuePosition = Position(0, 0);
-  if (myAngleInRadians == 0 && !statuePosition.IsBetween(pos, *this)) {
-    return false;
-  } else {
-    return cat_sees;
-  }
+  // // if the statue position is between the cat and the mouse, then the cat can't see?
+  // Position statuePosition = Position(0, 0);
+  // if (myAngleInRadians == 0 && !statuePosition.IsBetween(pos, *this)) {
+  //   return false;
+  // } else {
+  //   return cat_sees;
+  // }
 }
 
 bool Position::IsAtStatue() const {
@@ -81,13 +84,22 @@ bool Position::IsAtStatue() const {
 }
 
 bool Position::IsBetween(Position pos1, Position pos2) const {
-  float angle1 = pos1.myAngleInRadians;
-  float angle2 = pos2.myAngleInRadians;
+  float a = pos1.myAngleInRadians;
+  float b = myAngleInRadians;
+  float c = pos2.myAngleInRadians;
 
-  float radius1 = pos1.myRadius;
-  float radius2 = pos2.myRadius;
+  float r1 = pos1.myRadius;
+  float r2 = pos2.myRadius;
 
-  if (angle1 - angle2 < M_PI && radius1 == radius2) {
+  /*
+    Precondition: the counterclockwise difference between the first and second argument positions
+                  is less than pi radians, and the radii of all the positions are the same.
+    An angle B is between angles A and C in the following circumstances (both):
+       - cos (B - A) > cos (C - A)
+       - cos (C - B) > cos (C - A) (angles in radian)
+     The difference C - A is assumed to be less than 90°, or π/2 radians. */
+
+  if (c-a < M_PI && r1 == r2 && cos(b - a) > cos(c - a) && cos(c - b) > cos(c - a)) {
     return true;
   } else {
     return false;
