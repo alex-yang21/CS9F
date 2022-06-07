@@ -1,5 +1,5 @@
 #include "positions.h"
-#include "positions.cpp" // need this?
+#include "positions.cpp"
 #include <iostream>
 #include <cmath>
 using namespace std;
