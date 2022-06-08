@@ -4,6 +4,14 @@
 #include <cmath>
 using namespace std;
 
+/* Convert from degrees to radians */
+float toRadians(float angleInDegrees) {
+  if (angleInDegrees < 0) {
+    angleInDegrees += 360;
+  }
+  return angleInDegrees * (M_PI / 180);
+}
+
 /**
  * You define the GetPositions function.
  * It should read legal cat and mouse positions from the user
@@ -14,19 +22,23 @@ void GetPositions(Position &cat_position, Position &mouse_position)
 {
     // TODO: Your code here
     // take in input from the user for the mouse (just angle since it has a 1m radius) and cat (angle and radius from statue)
-    float cat_angle;
     float cat_radius;
+    float cat_angle;
     float mouse_angle;
 
-    std::cout << "Input cat angle: ";
-    std::cin >> cat_angle;
+    cout << "\n" << "Input cat radius: ";
+    cin >> cat_radius;
 
-    std::cout << "\n" << "Input cat radius: ";
-    std::cin >> cat_radius;
+    cout << "Input cat angle: ";
+    cin >> cat_angle;
 
-    std::cout << "\n" << "Input mouse angle: ";
-    std::cin >> mouse_angle;
-    std::cout <<"\n";
+    cout << "\n" << "Input mouse angle: ";
+    cin >> mouse_angle;
+    cout <<"\n";
+
+    // convert to to radians
+    cat_angle = toRadians(cat_angle);
+    mouse_angle = toRadians(mouse_angle);
 
     // set the private attributes of the Position objects
     cat_position.SetAbsolutePosition(cat_radius, cat_angle);
@@ -61,7 +73,7 @@ void RunChase(Position &cat_position, Position &mouse_position) // we want the p
       /* The cat catches the mouse when it (the cat) moves past the mouse while at the base of the statue,
          i.e. when the cat radius is 1.0 and the mouse angle lies between the old cat angle and the new cat angle. */
       if (mouse_position.IsBetween(old_cat_position, cat_position)) {
-        std::cout << "Cat catches mouse on turn " << timer << endl;
+        cout << "Cat catches mouse on turn " << timer+1 << endl;
         caught = true;
         break;
       }
@@ -70,10 +82,10 @@ void RunChase(Position &cat_position, Position &mouse_position) // we want the p
       mouse_position.IncrementPosition(0, 1);
 
       // 4. increment time and print positions, reassign old_cat_position
-      std::cout << "Cat position: ";
+      cout << "Cat position: ";
       cat_position.Print();
 
-      std::cout << "Mouse position: ";
+      cout << "Mouse position: ";
       mouse_position.Print();
 
       timer += 1;
@@ -82,7 +94,7 @@ void RunChase(Position &cat_position, Position &mouse_position) // we want the p
 
     // cat gives up
     if (!caught) {
-      std::cout << "Cat gives up.";
+      cout << "Cat gives up.";
     }
 }
 

@@ -99,7 +99,7 @@ bool Position::IsBetween(Position pos1, Position pos2) const {
        - cos (C - B) > cos (C - A) (angles in radian)
      The difference C - A is assumed to be less than 90°, or π/2 radians. */
 
-  if (c-a < M_PI && r1 == r2 && cos(b - a) > cos(c - a) && cos(c - b) > cos(c - a)) {
+  if (c-a <= M_PI && myRadius == r1 == r2 && cos(b - a) > cos(c - a) && cos(c - b) > cos(c - a)) {
     return true;
   } else {
     return false;
