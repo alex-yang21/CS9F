@@ -53,13 +53,13 @@ void GetPositions(Position &cat_position, Position &mouse_position)
  * catch the mouse, or 30 time units will go by and the cat will
  * give up.
  */
-void RunChase(Position &cat_position, Position &mouse_position) // we want the pointer to the position so we can keep a copy of the old position
+void RunChase(Position &cat_position, Position &mouse_position)
 {
     // TODO: Your code here
     int timer = 0;
     bool caught = false;
 
-    Position old_cat_position = cat_position;
+    Position old_cat_position = cat_position; // same as Position old_cat_position(cat_position) which invokes the copy constructor
 
     while (timer < 30) {
       // 1. update cat position
