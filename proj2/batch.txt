@@ -1,0 +1,4 @@
+update test 1
+list names
+list quantities
+quit

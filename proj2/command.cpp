@@ -68,25 +68,36 @@ void InterpretCommands(istream& cmds)
 void InterpretUpdate(istream& cmd) {
     string word;
     int num;
+    string temp;
 
     if (!(cmd >> word >> num)) { // no other words given, error
-        cerr << "Update command requires a corresponding word and number." << endl;
+        cerr << "'update' requires a corresponding word and number." << endl;
+        return;
     }
 
-    cout << "Update " << word << " " << num << endl; // temp place holder
+    if (cmd >> temp) {
+        cerr << "Too many arguments for 'update'." << endl;
+        return;
+    }
+
+    cout << "update " << word << " " << num << endl; // temp place holder
 
     return;
 }
 
 void InterpretList(istream& cmd) {
     string word;
+    string temp;
 
     if (!(cmd >> word)) {
-        cerr << "List requires another command 'names' or 'quantities'." << endl;
+        cerr << "'list' requires another command 'names' or 'quantities'." << endl;
+    } else if (cmd >> temp) {
+        cerr << "Too many arguments for 'list'." << endl;
+        return;
     } else if (word == "names") {
-        ;
+        cout << "list names" << endl;
     } else if (word == "quantities") {
-        ;
+        cout << "list quantities" << endl;
     } else {
         cerr << "Unrecognizable command word for 'list'." << endl;
     }
@@ -100,9 +111,16 @@ void InterpretBatch(istream& cmd) {
     Assume that the file does not contain any batch commands.
     */ 
     string fileName;
+    string temp;
 
     if (!(cmd >> fileName)) {
         cerr << "Batch requires the name of a file." << endl;
+        return;
+    }
+
+    if (cmd >> temp) {
+        cerr << "Too many arguments for 'batch'." << endl;
+        return;
     }
 
     ifstream file; 
@@ -117,7 +135,9 @@ void InterpretQuit(istream& cmd) {
     string temp;
     if (cmd >> temp) {
         cerr << "Exit command should have no other arguments." << endl;
+        return;
     }
+    
     exit(0);
     return;
 }
