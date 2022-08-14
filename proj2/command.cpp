@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
-#include "inventory.h"
+#include "inventory.cpp"
 using namespace std;
 
 // Function Prototypes
@@ -86,7 +86,7 @@ void InterpretUpdate(istream& cmd) {
 
     // do the update
     inventory.Update(word, num);
-    inventory.PrintItems(); // debugging
+    // inventory.PrintItems(); // debugging
 
     return;
 }

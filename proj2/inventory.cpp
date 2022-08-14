@@ -10,11 +10,11 @@ Inventory::Inventory() {
 void Inventory::Update(string itemName, int amount) {
     int numItems = items.size();
     bool found = false;
-    for (int i=0; i < numItems; i++) {
-        struct item currItem = items[i];
-        if (currItem.itemName == itemName) {
-            currItem.amount += amount;
+    for (int i = 0; i < numItems; i++) {
+        if (items[i].itemName.compare(itemName) == 0) {
+            items[i].amount = amount;
             found = true;
+            cout << "found existing item" << endl;
         }
     }
 
@@ -26,25 +26,24 @@ void Inventory::Update(string itemName, int amount) {
     }
 }
 
+bool compareNames(item a, item b) {
+    return a.itemName < b.itemName;
+}
+
+bool compareQuantities(item a, item b) {
+    return a.amount < b.amount;
+}
+
+
 void Inventory::ListByName() {
     // sort the inventory by name
-    sort(items.begin(), items.end(), 
-        [](item a, item b) {
-            return a.itemName < b.itemName;
-        }
-    );
-
+    sort(items.begin(), items.end(), compareNames);
     PrintItems();
 }
 
 void Inventory::ListByQuantity() {
     // sort the inventory by quantity
-    sort(items.begin(), items.end(), 
-        [](item a, item b) {
-            return a.amount < b.amount;
-        }
-    );
-
+    sort(items.begin(), items.end(), compareQuantities);
     PrintItems();
 }
 
