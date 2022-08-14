@@ -18,7 +18,7 @@ void InterpretBatch(istream&);
 
 void InterpretQuit(istream&);
 
-// global inventory?
+// global inventory
 Inventory inventory;
 
 /**
