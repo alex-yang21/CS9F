@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
+#include "inventory.h"
 using namespace std;
 
 // Function Prototypes
@@ -16,6 +17,9 @@ void InterpretList(istream&);
 void InterpretBatch(istream&);
 
 void InterpretQuit(istream&);
+
+// global inventory?
+Inventory inventory;
 
 /**
  * Driver Function
@@ -80,7 +84,9 @@ void InterpretUpdate(istream& cmd) {
         return;
     }
 
-    cout << "update " << word << " " << num << endl; // temp place holder
+    // do the update
+    inventory.Update(word, num);
+    inventory.PrintItems(); // debugging
 
     return;
 }
@@ -95,9 +101,9 @@ void InterpretList(istream& cmd) {
         cerr << "Too many arguments for 'list'." << endl;
         return;
     } else if (word == "names") {
-        cout << "list names" << endl;
+        inventory.ListByName();
     } else if (word == "quantities") {
-        cout << "list quantities" << endl;
+        inventory.ListByQuantity();
     } else {
         cerr << "Unrecognizable command word for 'list'." << endl;
     }
