@@ -34,7 +34,6 @@ bool compareQuantities(item a, item b) {
     return a.amount < b.amount;
 }
 
-
 void Inventory::ListByName() {
     // sort the inventory by name
     sort(items.begin(), items.end(), compareNames);
