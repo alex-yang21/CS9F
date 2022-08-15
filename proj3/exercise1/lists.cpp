@@ -9,12 +9,20 @@ using namespace std;
  */
 ListNode::~ListNode()
 {
-    // this version is buggy
     cout << "Deleting node with value " << myValue << endl;
-    for (ListNode* p = this; p; p = p->myNext)
-    {
-        delete p;
+
+    // recursively delete
+    if (this == 0) {
+        return;
     }
+    
+    delete this->myNext;
+
+    // this version is buggy
+    // for (ListNode* p = this; p; p = p->myNext)
+    // {
+    //     delete p;
+    // }
 }
 
 /**
