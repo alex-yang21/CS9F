@@ -10,8 +10,6 @@ class Board
 {
 public:
     Board() {
-        // vector<vector<char> > board(M, vector<char>(N, '.'));
-
 		board.resize(M);
 		for (int i = 0; i < N; i++) {
 			board[i] = vector<char>(N);
