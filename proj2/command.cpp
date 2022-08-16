@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
-#include "inventory.cpp"
+#include "inventory.h"
 using namespace std;
 
 // Function Prototypes
