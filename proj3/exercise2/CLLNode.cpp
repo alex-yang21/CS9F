@@ -34,7 +34,16 @@ CLLNode* CLLNode::previous()
 CLLNode* CLLNode::insert(CLLNode* ptr)
 {
     // TODO: You fill this in
-    return 0;
+    // save the current node's previous's next to the new node
+    // set new node's previous to be the original previous
+    // set new node's next to be current node
+    // set current node's previous as the new node
+    this->myPrevious->myNext = ptr;
+    ptr->myPrevious = this->myPrevious;
+    ptr->myNext = this;
+    this->myPrevious = ptr;
+
+    return ptr;
 }
 
 /**
@@ -45,7 +54,24 @@ CLLNode* CLLNode::insert(CLLNode* ptr)
 CLLNode* CLLNode::remove()
 {
     // TODO: You fill this in
-    return 0;
+    assert(this != 0);
+
+    // check if there is only one element in the list to start with
+    if (this->myNext == 0) {
+        delete this;
+        return 0;
+    }
+
+    // set previous's next to be current next
+    this->myPrevious->myNext = this->myNext;
+
+    // set next's previous to be current previous
+    this->myNext->myPrevious = this->myPrevious;
+
+    // delete current node
+    delete this;
+
+    return this->myNext;
 }
 
 /**

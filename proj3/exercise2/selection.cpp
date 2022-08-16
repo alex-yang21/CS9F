@@ -12,6 +12,8 @@ int main()
     {
         CLLNode* newGuy = new CLLNode(j);
         // TODO: Your code here
+        // insert nodes here
+        (*list).insert(newGuy);
     }
     list->print();
 
@@ -23,6 +25,8 @@ int main()
         }
 
         // TODO: Your code here
+        // play game, remove player and pass to next player
+        (*list).remove();
     }
     cout << "Only one person remains: ";
     list->print();
