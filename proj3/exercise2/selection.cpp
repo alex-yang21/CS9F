@@ -1,6 +1,5 @@
-// #include "CLLNode.h"
+#include "CLLNode.h"
 #include <iostream>
-#include "CLLNode.cpp"
 using namespace std;
 
 int main()
