@@ -10,9 +10,9 @@ int main()
     Amoeba* grandparent = new Amoeba(string("Amos McCoy"));
     Amoeba* brother = new Amoeba(string("Fred"));
     Amoeba* sister = new Amoeba(string("Wilma"));
-    Amoeba* child1 = new Amoeba(string("Mike"));
+    Amoeba* child3 = new Amoeba(string("Mike"));
     Amoeba* child2 = new Amoeba(string("Homer"));
-    Amoeba* child3 = new Amoeba(string("Marge"));
+    Amoeba* child1 = new Amoeba(string("Marge")); // Marge's kids should be Lisa and Bart
     Amoeba* grandchild11 = new Amoeba(string("Bart"));
     Amoeba* grandchild12 = new Amoeba(string("Lisa"));
     Amoeba* grandchild31 = new Amoeba(string("Bill"));
@@ -41,9 +41,12 @@ int main()
     parent->AddChild(brother);
     parent->AddChild(sister);
 
+    // NEW add parent to grandparent
+    grandparent->AddChild(parent);
+
     // We won't need these any more now, will we?
     parent = 0;
-    grandparent = 0;
+    // grandparent = 0;
     brother = 0;
     sister = 0;
     child1 = 0;
@@ -57,4 +60,16 @@ int main()
     // Print my name and my parent's name.
     cout << "Hi, my name is " << me->Name() << endl;
     cout << "Meet my parent " << me->Parent()->Name() << endl;
+
+    // new
+    cout << "Meet my grandparent " << me->Parent()->Parent()->Name() << endl;
+
+    cout << "Printing my children: " << endl;
+    me->PrintChildren();
+
+    cout << "Printing my grandchildren: " << endl;
+    me->PrintGrandchildren();
+
+    cout << "Printing my grandparents descendents: " << endl;
+    grandparent->PrintDescendents();
 }
