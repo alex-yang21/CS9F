@@ -1,5 +1,4 @@
 #include "positions.h"
-#include "positions.cpp"
 #include <iostream>
 #include <cmath>
 using namespace std;
