@@ -57,7 +57,7 @@ CLLNode* CLLNode::remove()
     assert(this != 0);
 
     // check if there is only one element in the list to start with
-    if (this->myNext == 0) {
+    if (this->lengthIsOne()) {
         delete this;
         return 0;
     }
@@ -68,10 +68,13 @@ CLLNode* CLLNode::remove()
     // set next's previous to be current previous
     this->myNext->myPrevious = this->myPrevious;
 
+    // save next pointer
+    CLLNode* next = this->myNext;
+
     // delete current node
     delete this;
 
-    return this->myNext;
+    return next;
 }
 
 /**
