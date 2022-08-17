@@ -54,7 +54,9 @@ private:
 };
 
 ostream& operator<<(ostream& out, Position& pos)  { // write << operator overload here since it isn't recognized else where
-  return out; // TO-DO!!
+    out << "Position radius: " << pos.myRadius << endl;
+    out << "Position angle (radians): " << pos.myAngleInRadians << endl;
+    return out;
 }
 
 #endif

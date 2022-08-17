@@ -8,9 +8,10 @@ class Person: public Animal
     public:
         Person(string s, Position p);
         bool Chase();
+        void SetTarget(Animal* target);
 
     private:
-        double myAngularDistChange; // move clockwise 2 meters
+        float myAngularDistChange; // move clockwise 2 meters
 };
 #endif
 
@@ -24,8 +25,8 @@ class Cat: public Animal
         void SetTarget(Animal* target);
 
     private:
-        double myAngularDistChange; // move counterclockwise 1.25 meters
-        double myRadiusDistChange; // move 1 meter closer if sees target
+        float myAngularDistChange; // move counterclockwise 1.25 meters
+        float myRadiusDistChange; // move 1 meter closer if sees target
 };
 #endif
 
@@ -38,7 +39,7 @@ class Mouse: public Animal
         bool Chase();
 
     private:
-        double myAngularDistChange; // move 1.25 meters counterclockwise
+        float myAngularDistChange; // move 1.25 meters counterclockwise
 };
 
 #endif

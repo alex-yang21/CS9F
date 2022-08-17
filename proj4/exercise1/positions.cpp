@@ -110,7 +110,11 @@ bool Position::IsBetween(Position pos1, Position pos2) { // pos1 is old, pos2 is
 
 // Compare two positions.
 bool Position::operator==(Position coords) {
-  return true; // temp
+  if (myAngleInRadians == coords.myAngleInRadians && myRadius == coords.myRadius) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // ostream& Position::operator<<(ostream& out, Position& pos)  { // why is operator not recognized here?
@@ -118,5 +122,5 @@ bool Position::operator==(Position coords) {
 // }
 
 float Position::Normalize(float radians) {
-  return 0; // temp
+  return 0; // TO-DO, not sure what needs to be done with this
 }
