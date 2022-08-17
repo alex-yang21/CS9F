@@ -21,7 +21,7 @@ public:
     // Negative radius values represent movement toward the statue.
     // Positive angular distance changes represent
     // counterclockwise motion; negative values are clockwise.
-    void IncrementPosition(float rChange, float thetaChange);
+    void IncrementPosition(float rChange, float angularDistChange);
 
     // Compare two positions.
     bool operator==(Position coords);
@@ -45,7 +45,7 @@ public:
     // between the first and second argument positions is less
     // than pi radians, and the radii of all the positions
     // are the same.
-    bool IsBetween(Position old, Position current);
+    bool IsBetween(Position pos1, Position pos2);
 
 private:
     float myRadius;
@@ -54,7 +54,7 @@ private:
 };
 
 ostream& operator<<(ostream& out, Position& pos)  { // write << operator overload here since it isn't recognized else where
-  return out;
+  return out; // TO-DO!!
 }
 
 #endif

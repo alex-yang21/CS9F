@@ -83,7 +83,7 @@ bool Position::IsAtStatue() {
   }
 }
 
-bool Position::IsBetween(Position pos1, Position pos2) {
+bool Position::IsBetween(Position pos1, Position pos2) { // pos1 is old, pos2 is current
   float a = pos1.myAngleInRadians;
   float b = myAngleInRadians;
   float c = pos2.myAngleInRadians;
@@ -106,7 +106,7 @@ bool Position::IsBetween(Position pos1, Position pos2) {
   }
 }
 
-// new stuff, operator overloading, private func
+// NEW STUFF, operator overloading, private func
 
 // Compare two positions.
 bool Position::operator==(Position coords) {
