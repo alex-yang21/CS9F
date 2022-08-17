@@ -51,4 +51,8 @@ private:
     float Normalize(float radians);
 };
 
+ostream& operator<<(ostream& out, Position& pos)  { // write << operator overload here since it isn't recognized else where
+  return out;
+}
+
 #endif
