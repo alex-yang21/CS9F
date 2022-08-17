@@ -2,6 +2,7 @@
 #define POSITIONS_H
 
 #include <iostream>
+using namespace std;
 
 class Position
 {
@@ -28,7 +29,7 @@ public:
 
     // Print this position.
     void Print();
-    friend ostream& operator<<(ostream& out, Position& pos);
+    // friend std::ostream& operator<<(std::ostream& out, Position& pos); don't need
 
     // Return true if someone at this position can see someone
     // or something at the argument position (i.e. the statue
@@ -50,13 +51,7 @@ public:
 private:
     float myRadius;
     float myAngleInRadians;
-    float Normalize(float radians);
+    // float Normalize(float radians); don't need
 };
-
-ostream& operator<<(ostream& out, Position& pos)  { // write << operator overload here since it isn't recognized else where
-    out << "Position radius: " << pos.myRadius << endl;
-    out << "Position angle (radians): " << pos.myAngleInRadians << endl;
-    return out;
-}
 
 #endif

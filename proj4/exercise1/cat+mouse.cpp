@@ -11,10 +11,10 @@ void RunChase(Scene allAnimals)
         {
             if (allAnimals[k]->Chase())
             {
+                cout << "Chase ended at turn: " << time+1 << endl; // my line
                 return;
             }
         }
-        cout << endl;
     }
     cout << "Chase took too long; all animals drifted away." << endl;
 }

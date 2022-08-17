@@ -65,14 +65,6 @@ bool Position::Sees(Position pos) {
   // cat sees mouse if (cat radius) * cos (cat angle - mouse angle) >= 1.0 (angles in radian)
   bool cat_sees = myRadius * cos(myAngleInRadians - pos.myAngleInRadians) >= 1.0 ? true : false;
   return cat_sees;
-
-  // // if the statue position is between the cat and the mouse, then the cat can't see?
-  // Position statuePosition = Position(0, 0);
-  // if (myAngleInRadians == 0 && !statuePosition.IsBetween(pos, *this)) {
-  //   return false;
-  // } else {
-  //   return cat_sees;
-  // }
 }
 
 bool Position::IsAtStatue() {
@@ -115,12 +107,4 @@ bool Position::operator==(Position coords) {
   } else {
     return false;
   }
-}
-
-// ostream& Position::operator<<(ostream& out, Position& pos)  { // why is operator not recognized here?
-//   return out;
-// }
-
-float Position::Normalize(float radians) {
-  return 0; // TO-DO, not sure what needs to be done with this
 }
