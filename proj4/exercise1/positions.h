@@ -1,6 +1,8 @@
 #ifndef POSITIONS_H
 #define POSITIONS_H
 
+#include <iostream>
+
 class Position
 {
 public:

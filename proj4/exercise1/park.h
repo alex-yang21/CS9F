@@ -7,7 +7,7 @@
 
 class Animal
 {
-    friend class Scene;
+    friend class Scene; // this means can access private members of Scene
 
 public:
     Animal(string s, Position p);
